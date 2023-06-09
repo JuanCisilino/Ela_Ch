@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "215701315507",
+    "project_id": "elaniin-challenge",
+    "storage_bucket": "elaniin-challenge.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:215701315507:android:8a303557bc7cdda200b5c6",
+        "android_client_info": {
+          "package_name": "com.frost.elaniinchallenge"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "215701315507-uml109nod2rf5vn5j31dr66id0eu33nr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.frost.elaniinchallenge",
+            "certificate_hash": "5f0a74278385eb4f08dc6ca5000eb66edb91d89c"
+          }
+        },
+        {
+          "client_id": "215701315507-b1lm889d5nppaj0etv71ciu2hhmmc1hv.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDzj-43wPyUZUwTqVLJVTfVZujpJQSg9_E"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "215701315507-b1lm889d5nppaj0etv71ciu2hhmmc1hv.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
