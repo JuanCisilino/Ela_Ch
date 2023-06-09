@@ -7,4 +7,16 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="kanto">#D50A0A</color>
+    <color name="jhoto">#7B86DC</color>
+    <color name="hoenn">#359A03</color>
+    <color name="sinnoh">#FFE601</color>
+    <color name="unova">#ECA6CE</color>
+    <color name="kalos">#9201CC</color>
+    <color name="alola">#BC349A</color>
+    <color name="galar">#9A9A99</color>
+    <color name="hisui">#D51551</color>
+    <color name="paldea">#E6AAE6</color>
 </resources>
