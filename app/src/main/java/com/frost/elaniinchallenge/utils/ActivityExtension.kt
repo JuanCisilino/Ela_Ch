@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.frost.elaniinchallenge.R
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -29,13 +31,26 @@ fun Activity.showAlert(){
 
 fun Activity.getPref(): SharedPreferences = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
 
-fun Activity.saveRegionPref(region: String){
+fun Activity.savePref(region: String, email: String){
     val prefs = getPref().edit()
     prefs.putString(R.string.region.toString(), region)
+    prefs.putString(R.string.email.toString(), email)
     prefs.apply()
 }
 
-fun Activity.getRegionPref(): String?{
+fun Activity.getPairPref(): Pair<String, String>{
     val prefs = getPref()
-    return prefs.getString(R.string.region.toString(), null)
+    val region = prefs.getString(R.string.region.toString(), null)
+    val email = prefs.getString(R.string.email.toString(), null)
+    return Pair(region?:"", email?:"")
+}
+
+fun Activity.clearPrefs(){
+    val prefs = getPref()
+    prefs.edit()?.clear()?.apply()
+}
+
+fun Activity.hideKeyboard(view: View) {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }
