@@ -16,10 +16,13 @@ class MainViewModel @Inject constructor(private val loginUC: LoginUC): ViewModel
 
     var loadStateLiveData = MutableLiveData<LoadState>()
     var regionListLiveData = MutableLiveData<List<Region>>()
+    var databaseLiveData = MutableLiveData<Unit?>()
     var loginLiveData = MutableLiveData<Unit>()
     var errorLiveData = MutableLiveData<String>()
 
     private lateinit var regionList: List<Region>
+    lateinit var mail: String
+    private set
 
     fun onCreate(){
         viewModelScope.launch {
@@ -36,8 +39,21 @@ class MainViewModel @Inject constructor(private val loginUC: LoginUC): ViewModel
         }
     }
 
-    fun signIn(credential: AuthCredential){
+    fun initDatabase(){
         viewModelScope.launch {
+            val result = loginUC.initialRun()
+            result.pokemonList
+                ?.let { databaseLiveData.postValue(Unit) }
+                ?:run {
+                    databaseLiveData.postValue(null)
+                    loginUC.createDBPokemonList()
+                }
+        }
+    }
+
+    fun signIn(credential: AuthCredential, email: String){
+        viewModelScope.launch {
+            mail = email
             loginUC.signInWithCredential(credential).addOnCompleteListener {
                 if (it.isSuccessful){
                     loginLiveData.postValue(Unit)
@@ -46,6 +62,12 @@ class MainViewModel @Inject constructor(private val loginUC: LoginUC): ViewModel
                     errorLiveData.postValue(it.exception?.message)
                 }
             }
+        }
+    }
+
+    fun signOut(){
+        viewModelScope.launch {
+            loginUC.signOut()
         }
     }
 }

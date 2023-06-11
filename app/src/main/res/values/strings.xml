@@ -2,6 +2,7 @@
     <string name="app_name">Elaniin Challenge</string>
     <string name="entrance">Ingresa con\ntu cuenta</string>
     <string name="pick_zone">Elige una zona</string>
+
     <string name="kanto">kanto</string>
     <string name="johto">johto</string>
     <string name="hoenn">hoenn</string>
@@ -11,10 +12,28 @@
     <string name="alola">alola</string>
     <string name="galar">galar</string>
     <string name="paldea">paldea</string>
+
+    <string name="type_grass">grass</string>
+    <string name="type_fire">fire</string>
+    <string name="type_poison">poison</string>
+    <string name="type_psychic">psychic</string>
+    <string name="type_fighting">fighting</string>
+    <string name="type_water">water</string>
+    <string name="type_normal">normal</string>
+    <string name="type_dark">dark</string>
+    <string name="type_flying">flying</string>
+    <string name="type_electric">electric</string>
+
+    <string name="video_message">Se esta armando la lista de pokemons\nte dejo unos openings mientras.. son muchos..</string>
+
     <string name="error_message">Se ha producido un error autenticando al usuario</string>
     <string name="error">Error</string>
     <string name="ok">Ok</string>
+
+    <string name="create">Crear Equipo</string>
+    <string name="created">Ver Equipos Creados</string>
     <string name="region">region</string>
+    <string name="email">email</string>
     <string name="prefs_file">com.frost.elaniinchallenge.PREFERENCE_FILE_KEY</string>
 
 </resources>

@@ -29,13 +29,21 @@ fun Activity.showAlert(){
 
 fun Activity.getPref(): SharedPreferences = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
 
-fun Activity.saveRegionPref(region: String){
+fun Activity.savePref(region: String, email: String){
     val prefs = getPref().edit()
     prefs.putString(R.string.region.toString(), region)
+    prefs.putString(R.string.email.toString(), email)
     prefs.apply()
 }
 
-fun Activity.getRegionPref(): String?{
+fun Activity.getPairPref(): Pair<String, String>{
     val prefs = getPref()
-    return prefs.getString(R.string.region.toString(), null)
+    val region = prefs.getString(R.string.region.toString(), null)
+    val email = prefs.getString(R.string.email.toString(), null)
+    return Pair(region?:"", email?:"")
+}
+
+fun Activity.clearPrefs(){
+    val prefs = getPref()
+    prefs.edit()?.clear()?.apply()
 }

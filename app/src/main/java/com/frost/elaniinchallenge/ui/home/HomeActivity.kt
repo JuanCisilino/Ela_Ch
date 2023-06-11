@@ -6,7 +6,9 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.frost.elaniinchallenge.databinding.ActivityHomeBinding
-import com.frost.elaniinchallenge.utils.getRegionPref
+import com.frost.elaniinchallenge.ui.addedit.AddEditActivity
+import com.frost.elaniinchallenge.utils.clearPrefs
+import com.frost.elaniinchallenge.utils.getPairPref
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,12 +27,21 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.homeText.text = getRegionPref()
+        viewModel.setValues(getPairPref())
+        setButtons()
+    }
+
+    private fun setButtons() {
+        with(binding){
+            createButton.setOnClickListener { AddEditActivity.start(this@HomeActivity) }
+            showCreated.setOnClickListener { viewModel.getCreated() }
+        }
     }
 
     override fun onBackPressed() {
         super.onBackPressed()
         viewModel.signOut()
+        clearPrefs()
         finish()
     }
 }
