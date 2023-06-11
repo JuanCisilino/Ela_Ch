@@ -4,6 +4,8 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.content.Context
 import android.content.SharedPreferences
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import com.frost.elaniinchallenge.R
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -46,4 +48,9 @@ fun Activity.getPairPref(): Pair<String, String>{
 fun Activity.clearPrefs(){
     val prefs = getPref()
     prefs.edit()?.clear()?.apply()
+}
+
+fun Activity.hideKeyboard(view: View) {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
 }

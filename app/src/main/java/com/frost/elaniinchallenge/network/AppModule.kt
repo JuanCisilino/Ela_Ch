@@ -91,14 +91,15 @@ object AppModule {
     @Provides
     fun provideHomeUC(
         authInstance: FirebaseAuth,
-        apiRepository: ApiRepository) = HomeUC(authInstance, apiRepository)
+        firebaseRepository: FirebaseRepository,
+        apiRepository: ApiRepository) = HomeUC(authInstance, firebaseRepository, apiRepository)
 
     @Singleton
     @Provides
     fun provideAddEditUC(
         databaseRepository: DatabaseRepository,
-        apiRepository: ApiRepository,
+        firebaseRepository: FirebaseRepository,
         crashlyticsInstance: FirebaseCrashlytics) =
-        AddEditUc(databaseRepository, apiRepository, crashlyticsInstance)
+        AddEditUc(databaseRepository, firebaseRepository, crashlyticsInstance)
 
 }

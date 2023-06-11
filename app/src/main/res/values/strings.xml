@@ -26,6 +26,9 @@
 
     <string name="video_message">Se esta armando la lista de pokemons\nte dejo unos openings mientras.. son muchos..</string>
 
+    <string name="team_name">Nombre del equipo</string>
+    <string name="save">Guardar</string>
+
     <string name="error_message">Se ha producido un error autenticando al usuario</string>
     <string name="error">Error</string>
     <string name="ok">Ok</string>

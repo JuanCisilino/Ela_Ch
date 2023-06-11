@@ -20,9 +20,32 @@ data class PokemonDB(
         id = this.id,
         name = this.name,
         image = this.image,
-        pokedex = this.pokedex?.split(";")?.toTypedArray()?.toList(),
+        pokedex = translateTypes(this.types),
         types = this.types?.split(";")?.toTypedArray()?.toList(),
         isSelected = this.isSelected,
         region = this.region
     )
+
+    private fun translateTypes(types: String?): List<String>{
+        val finalList = arrayListOf<String>()
+        val typeList = types?.split(";")
+        typeList?.forEach { finalList.add(getTranslation(it)) }
+        return finalList
+    }
+
+    private fun getTranslation(type: String) =
+        when(type){
+            "grass" -> "Hierba"
+            "fire" -> "Fuego"
+            "poison" -> "Veneno"
+            "psychic" -> "Psiquico"
+            "fighting" -> "Peleador"
+            "water" -> "Agua"
+            "normal" -> "Normal"
+            "dark" -> "Oscuro"
+            "flying" -> "Volador"
+            "electric" -> "Electrico"
+            "metal" -> "Metal"
+            else -> "Unknown"
+        }
 }

@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -19,8 +20,9 @@ import kotlin.collections.ArrayList
 class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     private var pokemonList = listOf<Pokemon>()
-
-    var onPokemonClickCallback : ((pokemonId: String) -> Unit)? = null
+    private var partialList = arrayListOf<Pokemon>()
+    var onPokemonAddedClickCallback : ((pokemon: Pokemon) -> Unit)? = null
+    var onPokemonRemovedClickCallback : ((pokemon: Pokemon) -> Unit)? = null
 
     fun updateItems(newItems: List<Pokemon>) {
         val diffResult = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
@@ -53,6 +55,7 @@ class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<Pokemo
     override fun onBindViewHolder(holder: PokemonAdapter.ViewHolder, position: Int) {
         with(holder) {
             with(pokemonList[position]) {
+                val pokemon = this
                 with(binding) {
                     if (!image.isNullOrEmpty()) glideIt(image!!, pokeImageView)
                     nameTextView.text = name?.uppercase(Locale.ROOT)
@@ -60,28 +63,43 @@ class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<Pokemo
                     typesTextView.text = generateTypeString(types?: listOf())
                     descriptionTextView.text = generateRandomDescription(pokedex)
                     pokemonLayout.setBackgroundColor(getBackgroundType(types))
+                    pokemonLayout.setOnClickListener {
+                        if (isSelected == false){
+                            if (partialList.size < 7) {
+                                teamImageView.setImageResource(R.drawable.baseline_radio_button_checked_24)
+                                pokemon.isSelected = true
+                                partialList.add(pokemon)
+                                onPokemonAddedClickCallback?.invoke(pokemon)
+                            }
+                        } else {
+                            teamImageView.setImageResource(R.drawable.baseline_radio_button_unchecked_24)
+                            partialList.remove(pokemon)
+                            pokemon.isSelected = false
+                            onPokemonRemovedClickCallback?.invoke(pokemon)
+                        }
+                    }
                 }
             }
         }
     }
 
     private fun generateTypeString(types: List<String>): String{
-        val string = "Tipo: ${types.joinToString(", ")}"
+        val newList = arrayListOf<String>()
         types.forEach {
             when(it) {
-                context.getString(R.string.type_grass) -> string.plus("Hierba ")
-                context.getString(R.string.type_fire) -> string.plus("Fuego ")
-                context.getString(R.string.type_poison) -> string.plus("Veneno ")
-                context.getString(R.string.type_psychic) -> string.plus("Psiquico ")
-                context.getString(R.string.type_fighting) -> string.plus("Peleador ")
-                context.getString(R.string.type_water) -> string.plus("Agua ")
-                context.getString(R.string.type_normal) -> string.plus("Normal ")
-                context.getString(R.string.type_dark) -> string.plus("Oscuro ")
-                context.getString(R.string.type_flying) -> string.plus("Volador ")
-                context.getString(R.string.type_electric) -> string.plus("Electrico ")
+                context.getString(R.string.type_grass) -> newList.add("Hierba")
+                context.getString(R.string.type_fire) -> newList.add("Fuego")
+                context.getString(R.string.type_poison) -> newList.add("Veneno")
+                context.getString(R.string.type_psychic) -> newList.add("Psiquico")
+                context.getString(R.string.type_fighting) -> newList.add("Peleador")
+                context.getString(R.string.type_water) -> newList.add("Agua")
+                context.getString(R.string.type_normal) -> newList.add("Normal")
+                context.getString(R.string.type_dark) -> newList.add("Oscuro")
+                context.getString(R.string.type_flying) -> newList.add("Volador")
+                context.getString(R.string.type_electric) -> newList.add("Electrico")
             }
         }
-        return string
+        return "Tipo: ${newList.joinToString(", ")}"
     }
 
     private fun generateRandomDescription(pokedex: List<String>?): String{
