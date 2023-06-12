@@ -92,7 +92,9 @@ object AppModule {
     fun provideHomeUC(
         authInstance: FirebaseAuth,
         firebaseRepository: FirebaseRepository,
-        databaseRepository: DatabaseRepository) = HomeUC(authInstance, firebaseRepository, databaseRepository)
+        databaseRepository: DatabaseRepository,
+        crashlyticsInstance: FirebaseCrashlytics) =
+        HomeUC(authInstance, firebaseRepository, databaseRepository, crashlyticsInstance)
 
     @Singleton
     @Provides

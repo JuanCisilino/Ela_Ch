@@ -6,17 +6,19 @@ import com.frost.elaniinchallenge.models.Team
 import com.frost.elaniinchallenge.repositories.DatabaseRepository
 import com.frost.elaniinchallenge.repositories.FirebaseRepository
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import javax.inject.Inject
 
 class HomeUC @Inject constructor(
-    private val auth: FirebaseAuth,
+    private val auth: FirebaseAuth?=null,
     private val firebaseRepository: FirebaseRepository,
     private val databaseRepository: DatabaseRepository,
+    private val crashlyticsInstance: FirebaseCrashlytics?=null
 ) {
 
-    suspend fun signOut() = auth.signOut()
+    suspend fun signOut() = auth?.signOut()
 
-    suspend fun getCreated() = firebaseRepository.getTeams()
+    suspend fun getTeams() = firebaseRepository.getTeams()
 
     suspend fun removeTeam(teamId: Int) = firebaseRepository.removeTeam(teamId)
 
@@ -27,7 +29,9 @@ class HomeUC @Inject constructor(
         pokemons.forEach { id ->
             val pokemon = list.pokemonDBList?.find { it.id == id }
             pokemon?.let { pokeList.add(it.mapToPokemon()) }
-                ?:run { return ResponseData(errorMessage = "No se pudo crear pokemon de equipo") }
+                ?:run {
+                    crashlyticsInstance?.recordException(Throwable(message = "No se pudo crear pokemon de equipo"))
+                    return ResponseData(errorMessage = "No se pudo crear pokemon de equipo") }
         }
         return ResponseData(pokemonList = pokeList)
     }

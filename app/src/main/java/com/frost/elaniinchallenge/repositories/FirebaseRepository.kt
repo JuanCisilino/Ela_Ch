@@ -22,8 +22,7 @@ class FirebaseRepository @Inject constructor(private val dbInstance: FirebaseDat
         return ResponseData(teamReference = teamReference)
     }
 
-    fun removeTeam(teamId: Int): ResponseData {
+    fun removeTeam(teamId: Int) {
         teamReference.child("$teamId").removeValue()
-        return ResponseData(instance = dbInstance)
     }
 }
