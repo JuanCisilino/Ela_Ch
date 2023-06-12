@@ -7,6 +7,8 @@ La aplicación **Proyecto Pokemon** es una aplicación nativa desarrollada en Ko
 La aplicación es un juego que brinda una base de datos de pokémones. Al iniciar la aplicación por primera vez, se reproduce un video con todas las openings de las 10 temporadas, mientras se genera la base de datos de pokémones de forma interna. Este video solo se verá hasta que la base de datos se haya completado. Si se desactiva o acelera, no habrá tiempo suficiente para crear la base de datos interna, por lo que se volverá a mostrar el video hasta que se pueda generar de forma correcta.
 
 **Una posible solución a este problema podría ser crear una API REST que genere la base de datos de pokémones y consumirla en tiempo real desde la aplicación.**
+https://github.com/JuanCisilino/SimplifyPokeApi
+**Con un update podria solucionar este problema** Proximo Feature
 
 Una vez que finaliza el video, se puede iniciar sesión a través de la cuenta de Google para ver la lista de regiones disponibles.
 
