@@ -1,4 +1,4 @@
-package com.frost.elaniinchallenge.ui.addedit
+package com.frost.elaniinchallenge.ui.add
 
 import android.content.Context
 import android.content.Intent
@@ -10,28 +10,28 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.frost.elaniinchallenge.R
-import com.frost.elaniinchallenge.Region
-import com.frost.elaniinchallenge.databinding.ActivityAddEditBinding
+import com.frost.elaniinchallenge.databinding.ActivityAddBinding
 import com.frost.elaniinchallenge.models.Pokemon
+import com.frost.elaniinchallenge.ui.adapters.PokemonAdapter
 import com.frost.elaniinchallenge.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AddEditActivity : AppCompatActivity() {
+class AddActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityAddEditBinding
+    private lateinit var binding: ActivityAddBinding
     private lateinit var adapter: PokemonAdapter
-    private val viewModel by viewModels<AddEditViewModel>()
+    private val viewModel by viewModels<AddViewModel>()
 
     companion object{
         fun start(context: Context){
-            context.startActivity(Intent(context, AddEditActivity::class.java))
+            context.startActivity(Intent(context, AddActivity::class.java))
         }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAddEditBinding.inflate(layoutInflater)
+        binding = ActivityAddBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModel.setPair(getPairPref())
         setupAdapter()
@@ -74,7 +74,9 @@ class AddEditActivity : AppCompatActivity() {
         viewModel.loadStateLiveData.observe(this) { handleResponse(it) }
         viewModel.pokemonListLiveData.observe(this) { handleList(it) }
         viewModel.errorLiveData.observe(this) { showToast(it) }
-        viewModel.teamLiveData.observe(this) { binding.saveButton.isEnabled = true}
+        viewModel.teamLiveData.observe(this) {
+            if (!binding.teamNameEditText.text.isNullOrEmpty()) binding.saveButton.isEnabled = true
+        }
         viewModel.saveLiveData.observe(this) { finish() }
     }
 

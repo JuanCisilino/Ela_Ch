@@ -7,7 +7,7 @@ import com.frost.elaniinchallenge.database.PokemonDao
 import com.frost.elaniinchallenge.repositories.ApiRepository
 import com.frost.elaniinchallenge.repositories.DatabaseRepository
 import com.frost.elaniinchallenge.repositories.FirebaseRepository
-import com.frost.elaniinchallenge.usecases.AddEditUc
+import com.frost.elaniinchallenge.usecases.AddUc
 import com.frost.elaniinchallenge.usecases.HomeUC
 import com.frost.elaniinchallenge.usecases.LoginUC
 import com.google.firebase.auth.FirebaseAuth
@@ -92,7 +92,7 @@ object AppModule {
     fun provideHomeUC(
         authInstance: FirebaseAuth,
         firebaseRepository: FirebaseRepository,
-        apiRepository: ApiRepository) = HomeUC(authInstance, firebaseRepository, apiRepository)
+        databaseRepository: DatabaseRepository) = HomeUC(authInstance, firebaseRepository, databaseRepository)
 
     @Singleton
     @Provides
@@ -100,6 +100,6 @@ object AppModule {
         databaseRepository: DatabaseRepository,
         firebaseRepository: FirebaseRepository,
         crashlyticsInstance: FirebaseCrashlytics) =
-        AddEditUc(databaseRepository, firebaseRepository, crashlyticsInstance)
+        AddUc(databaseRepository, firebaseRepository, crashlyticsInstance)
 
 }

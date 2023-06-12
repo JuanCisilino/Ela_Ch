@@ -1,12 +1,10 @@
-package com.frost.elaniinchallenge.utils
+package com.frost.elaniinchallenge.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import androidx.appcompat.content.res.AppCompatResources
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -15,9 +13,8 @@ import com.frost.elaniinchallenge.R
 import com.frost.elaniinchallenge.databinding.PokemonItemBinding
 import com.frost.elaniinchallenge.models.Pokemon
 import java.util.*
-import kotlin.collections.ArrayList
 
-class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+class PokemonAdapter(private val context: Context, private val teamAdapter: Boolean ?= false) : RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
 
     private var pokemonList = listOf<Pokemon>()
     private var partialList = arrayListOf<Pokemon>()
@@ -52,7 +49,7 @@ class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<Pokemo
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: PokemonAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(pokemonList[position]) {
                 val pokemon = this
@@ -63,21 +60,26 @@ class PokemonAdapter(private val context: Context) : RecyclerView.Adapter<Pokemo
                     typesTextView.text = generateTypeString(types?: listOf())
                     descriptionTextView.text = generateRandomDescription(pokedex)
                     pokemonLayout.setBackgroundColor(getBackgroundType(types))
-                    pokemonLayout.setOnClickListener {
-                        if (isSelected == false){
-                            if (partialList.size < 7) {
-                                teamImageView.setImageResource(R.drawable.baseline_radio_button_checked_24)
-                                pokemon.isSelected = true
-                                partialList.add(pokemon)
-                                onPokemonAddedClickCallback?.invoke(pokemon)
+                    if (teamAdapter == true) {
+                        teamImageView.visibility = View.GONE
+                    } else {
+                        pokemonLayout.setOnClickListener {
+                            if (isSelected == false){
+                                if (partialList.size < 6) {
+                                    teamImageView.setImageResource(R.drawable.baseline_radio_button_checked_24)
+                                    pokemon.isSelected = true
+                                    partialList.add(pokemon)
+                                    onPokemonAddedClickCallback?.invoke(pokemon)
+                                }
+                            } else {
+                                teamImageView.setImageResource(R.drawable.baseline_radio_button_unchecked_24)
+                                partialList.remove(pokemon)
+                                pokemon.isSelected = false
+                                onPokemonRemovedClickCallback?.invoke(pokemon)
                             }
-                        } else {
-                            teamImageView.setImageResource(R.drawable.baseline_radio_button_unchecked_24)
-                            partialList.remove(pokemon)
-                            pokemon.isSelected = false
-                            onPokemonRemovedClickCallback?.invoke(pokemon)
                         }
                     }
+
                 }
             }
         }

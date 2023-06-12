@@ -10,7 +10,8 @@ import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.frost.elaniinchallenge.R
 import com.frost.elaniinchallenge.Region
-import com.frost.elaniinchallenge.databinding.ActivityMainBinding
+import com.frost.elaniinchallenge.databinding.ActivityLoginBinding
+import com.frost.elaniinchallenge.ui.adapters.RegionAdapter
 import com.frost.elaniinchallenge.ui.home.HomeActivity
 import com.frost.elaniinchallenge.utils.*
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -19,11 +20,11 @@ import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityLoginBinding
     private lateinit var mediaController: MediaController
-    private val viewModel by viewModels<MainViewModel>()
+    private val viewModel by viewModels<LoginViewModel>()
 
     companion object{
         const val GOOGLE_SIGN_IN = 100
@@ -31,7 +32,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
         mediaController = MediaController(this)
         viewModel.initDatabase()

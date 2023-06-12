@@ -28,13 +28,21 @@
 
     <string name="team_name">Nombre del equipo</string>
     <string name="save">Guardar</string>
+    <string name="search">Agregar</string>
 
     <string name="error_message">Se ha producido un error autenticando al usuario</string>
     <string name="error">Error</string>
     <string name="ok">Ok</string>
 
+
+    <string name="code">Pasale este codigo a tus amigos para compartir tu equipo</string>
+    <string name="edit_code">Ingrese Codigo</string>
+
     <string name="create">Crear Equipo</string>
-    <string name="created">Ver Equipos Creados</string>
+    <string name="insert_code">Cargar un equipo externo</string>
+    <string name="share">Compartir equipo</string>
+    <string name="delete">Eliminar equipo</string>
+
     <string name="region">region</string>
     <string name="email">email</string>
     <string name="prefs_file">com.frost.elaniinchallenge.PREFERENCE_FILE_KEY</string>

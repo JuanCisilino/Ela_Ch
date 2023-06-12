@@ -29,6 +29,15 @@ fun Activity.showAlert(){
     dialog.show()
 }
 
+fun Activity.showId(id: Int){
+    val builder = AlertDialog.Builder(this)
+    builder.setTitle(id.toString())
+    builder.setMessage(getString(R.string.code))
+    builder.setPositiveButton(R.string.ok, null)
+    val dialog = builder.create()
+    dialog.show()
+}
+
 fun Activity.getPref(): SharedPreferences = getSharedPreferences(getString(R.string.prefs_file), Context.MODE_PRIVATE)
 
 fun Activity.savePref(region: String, email: String){

@@ -3,13 +3,12 @@ package com.frost.elaniinchallenge.usecases
 import com.frost.elaniinchallenge.models.Pokemon
 import com.frost.elaniinchallenge.models.ResponseData
 import com.frost.elaniinchallenge.models.Team
-import com.frost.elaniinchallenge.repositories.ApiRepository
 import com.frost.elaniinchallenge.repositories.DatabaseRepository
 import com.frost.elaniinchallenge.repositories.FirebaseRepository
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import javax.inject.Inject
 
-class AddEditUc @Inject constructor(
+class AddUc @Inject constructor(
     private val databaseRepository: DatabaseRepository,
     private val firebaseRepository: FirebaseRepository,
     private val crashlyticsInstance: FirebaseCrashlytics) {

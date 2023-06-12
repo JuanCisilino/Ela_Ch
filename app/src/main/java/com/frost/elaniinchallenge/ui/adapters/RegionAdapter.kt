@@ -1,4 +1,4 @@
-package com.frost.elaniinchallenge.utils
+package com.frost.elaniinchallenge.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
