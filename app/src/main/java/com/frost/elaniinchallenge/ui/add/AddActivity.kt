@@ -51,7 +51,9 @@ class AddActivity : AppCompatActivity() {
                 if (!hasFocus) { checkIfFocus(view) }
             }
             teamNameEditText.setOnEditorActionListener { view, actionId, _ -> onActionDone(actionId, view) }
-            saveButton.setOnClickListener { viewModel.save(teamNameEditText.text.toString()) }
+            saveButton.setOnClickListener {
+                if (isInternetAvailable()) viewModel.save(teamNameEditText.text.toString())
+                else showToast(getString(R.string.no_internet))  }
         }
     }
 

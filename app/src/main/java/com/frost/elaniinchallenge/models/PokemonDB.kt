@@ -20,8 +20,8 @@ data class PokemonDB(
         id = this.id,
         name = this.name,
         image = this.image,
-        pokedex = translateTypes(this.types),
-        types = this.types?.split(";")?.toTypedArray()?.toList(),
+        pokedex = pokedex?.split(";"),
+        types = translateTypes(this.types),
         isSelected = this.isSelected,
         region = this.region
     )
@@ -45,7 +45,14 @@ data class PokemonDB(
             "dark" -> "Oscuro"
             "flying" -> "Volador"
             "electric" -> "Electrico"
-            "metal" -> "Metal"
+            "steel" -> "Metal"
+            "ground" -> "Tierra"
+            "rock" -> "Piedra"
+            "ghost" -> "Fantasma"
+            "bug" -> "Bicho"
+            "ice" -> "Hielo"
+            "dragon" -> "Dragon"
+            "fairy" -> "Hada"
             else -> "Unknown"
         }
 }

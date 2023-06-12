@@ -4,10 +4,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.frost.elaniinchallenge.models.Pokemon
-import com.frost.elaniinchallenge.models.ResponseData
 import com.frost.elaniinchallenge.models.Team
 import com.frost.elaniinchallenge.usecases.HomeUC
-import com.frost.elaniinchallenge.usecases.LoginUC
 import com.frost.elaniinchallenge.utils.LoadState
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -36,7 +34,7 @@ class HomeViewModel @Inject constructor(private val homeUC: HomeUC):ViewModel() 
     fun setValues(pair: Pair<String, String>){
         region = pair.first
         email = pair.second
-        getCreated()
+        getTeamsCreated()
     }
 
     fun signOut(){
@@ -45,10 +43,10 @@ class HomeViewModel @Inject constructor(private val homeUC: HomeUC):ViewModel() 
         }
     }
 
-    private fun getCreated(){
+    private fun getTeamsCreated(){
         loadStateLiveData.postValue(LoadState.Loading)
         viewModelScope.launch {
-            val result = homeUC.getCreated()
+            val result = homeUC.getTeams()
             result.teamReference?.addValueEventListener(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     teamList.clear()
@@ -70,21 +68,12 @@ class HomeViewModel @Inject constructor(private val homeUC: HomeUC):ViewModel() 
 
     fun removeTeam(team: Team){
         loadStateLiveData.postValue(LoadState.Loading)
-        val index = teamList.indexOf(team)
         viewModelScope.launch {
-            val result = homeUC.removeTeam(team.id!!)
+            homeUC.removeTeam(team.id!!)
 
-            val teamRef = result.instance?.getReference("teams/${index}")
-            teamRef?.removeValue()
-                ?.addOnSuccessListener {
-                    teamList.remove(team)
-                    teamsLiveData.postValue(teamList)
-                    loadStateLiveData.postValue(LoadState.Success)
-                }
-                ?.addOnFailureListener { error ->
-                    errorLiveData.postValue(error.message)
-                    loadStateLiveData.postValue(LoadState.Error)
-                }
+            teamList.remove(team)
+            teamsLiveData.postValue(teamList)
+            loadStateLiveData.postValue(LoadState.Success)
         }
     }
 
@@ -109,7 +98,7 @@ class HomeViewModel @Inject constructor(private val homeUC: HomeUC):ViewModel() 
             val team = Team(
                 id = generateUUID(),
                 email = email,
-                region = region,
+                region = externalTeam?.region,
                 name = externalTeam?.name,
                 pokemonIds = externalTeam?.pokemonIds
             )
