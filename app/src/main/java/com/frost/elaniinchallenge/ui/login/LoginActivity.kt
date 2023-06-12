@@ -37,7 +37,10 @@ class LoginActivity : AppCompatActivity() {
         mediaController = MediaController(this)
         viewModel.initDatabase()
         viewModel.onCreate()
-        binding.loginButton.setOnClickListener { setWidget() }
+        binding.loginButton.setOnClickListener {
+            if (isInternetAvailable()) setWidget()
+            else showToast(getString(R.string.video_message))
+        }
         subscribeToLiveData()
     }
 
@@ -83,7 +86,10 @@ class LoginActivity : AppCompatActivity() {
         val adapter = RegionAdapter(regionList, this)
         binding.itemsrecyclerView.layoutManager = GridLayoutManager(this, 2)
         binding.itemsrecyclerView.adapter = adapter
-        adapter.onRegionClickCallback = { goToNextActivity(it) }
+        adapter.onRegionClickCallback = {
+            if (isInternetAvailable()) goToNextActivity(it)
+            else showToast(getString(R.string.no_internet))
+        }
     }
 
     private fun goToNextActivity(region: String) {

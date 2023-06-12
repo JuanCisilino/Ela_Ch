@@ -13,18 +13,28 @@
     <string name="galar">galar</string>
     <string name="paldea">paldea</string>
 
-    <string name="type_grass">grass</string>
-    <string name="type_fire">fire</string>
-    <string name="type_poison">poison</string>
-    <string name="type_psychic">psychic</string>
-    <string name="type_fighting">fighting</string>
-    <string name="type_water">water</string>
-    <string name="type_normal">normal</string>
-    <string name="type_dark">dark</string>
-    <string name="type_flying">flying</string>
-    <string name="type_electric">electric</string>
+    <string name="grass">Hierba</string>
+    <string name="fire">Fuego</string>
+    <string name="poison">Veneno</string>
+    <string name="psychic">Psiquico</string>
+    <string name="fight">Peleador</string>
+    <string name="water">Agua</string>
+    <string name="normal">Normal</string>
+    <string name="dark">Oscuro</string>
+    <string name="flying">Volador</string>
+    <string name="electric">Electrico</string>
+    <string name="steel">Metal</string>
+    <string name="ground">Tierra</string>
+    <string name="rock">Piedra</string>
+    <string name="ghost">Fantasma</string>
+    <string name="bug">Bicho</string>
+    <string name="ice">Hielo</string>
+    <string name="dragon">Dragon</string>
+    <string name="fairy">Hada</string>
 
     <string name="video_message">Se esta armando la lista de pokemons\nte dejo unos openings mientras.. son muchos..</string>
+
+    <string name="no_internet">No hay internet.. prueba nuevamente cuando vuelva..</string>
 
     <string name="team_name">Nombre del equipo</string>
     <string name="save">Guardar</string>

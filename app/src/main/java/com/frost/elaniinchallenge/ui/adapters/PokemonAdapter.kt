@@ -57,7 +57,7 @@ class PokemonAdapter(private val context: Context, private val teamAdapter: Bool
                     if (!image.isNullOrEmpty()) glideIt(image!!, pokeImageView)
                     nameTextView.text = name?.uppercase(Locale.ROOT)
                     idTextView.text = "ID: $id"
-                    typesTextView.text = generateTypeString(types?: listOf())
+                    typesTextView.text = types?.joinToString(", ")
                     descriptionTextView.text = generateRandomDescription(pokedex)
                     pokemonLayout.setBackgroundColor(getBackgroundType(types))
                     if (teamAdapter == true) {
@@ -79,35 +79,14 @@ class PokemonAdapter(private val context: Context, private val teamAdapter: Bool
                             }
                         }
                     }
-
                 }
             }
         }
     }
 
-    private fun generateTypeString(types: List<String>): String{
-        val newList = arrayListOf<String>()
-        types.forEach {
-            when(it) {
-                context.getString(R.string.type_grass) -> newList.add("Hierba")
-                context.getString(R.string.type_fire) -> newList.add("Fuego")
-                context.getString(R.string.type_poison) -> newList.add("Veneno")
-                context.getString(R.string.type_psychic) -> newList.add("Psiquico")
-                context.getString(R.string.type_fighting) -> newList.add("Peleador")
-                context.getString(R.string.type_water) -> newList.add("Agua")
-                context.getString(R.string.type_normal) -> newList.add("Normal")
-                context.getString(R.string.type_dark) -> newList.add("Oscuro")
-                context.getString(R.string.type_flying) -> newList.add("Volador")
-                context.getString(R.string.type_electric) -> newList.add("Electrico")
-            }
-        }
-        return "Tipo: ${newList.joinToString(", ")}"
-    }
-
-    private fun generateRandomDescription(pokedex: List<String>?): String{
+    private fun generateRandomDescription(pokedex: List<String>?): String {
         if (pokedex.isNullOrEmpty()) return ""
-        //return pokedex.random()
-        return pokedex[0]
+        return pokedex.random()
     }
 
     private fun glideIt(url: String, image: ImageView) {
@@ -120,10 +99,27 @@ class PokemonAdapter(private val context: Context, private val teamAdapter: Bool
 
     private fun getBackgroundType(type: List<String>?): Int {
         type?:run { return context.getColor(R.color.white) }
-        if (type.any { it == context.getString(R.string.type_grass) }) return context.getColor(R.color.hoenn)
-        if (type.any { it == context.getString(R.string.type_fire) }) return context.getColor(R.color.kalos)
-        return if (type.any { it == context.getString(R.string.type_poison) }) context.getColor(R.color.kanto)
-        else context.getColor(R.color.white)
+        return when {
+            type.any{it == context.getString(R.string.grass)} -> context.getColor(R.color.grass)
+            type.any{it == context.getString(R.string.fire)} -> context.getColor(R.color.fire)
+            type.any{it == context.getString(R.string.poison)} -> context.getColor(R.color.poison)
+            type.any{it == context.getString(R.string.psychic)} -> context.getColor(R.color.psychic)
+            type.any{it == context.getString(R.string.fight)} -> context.getColor(R.color.fight)
+            type.any{it == context.getString(R.string.water)} -> context.getColor(R.color.water)
+            type.any{it == context.getString(R.string.normal)} -> context.getColor(R.color.normal)
+            type.any{it == context.getString(R.string.dark)} -> context.getColor(R.color.dark)
+            type.any{it == context.getString(R.string.flying)} -> context.getColor(R.color.flying)
+            type.any{it == context.getString(R.string.electric)} -> context.getColor(R.color.electric)
+            type.any{it == context.getString(R.string.steel)} -> context.getColor(R.color.steel)
+            type.any{it == context.getString(R.string.ground)} -> context.getColor(R.color.ground)
+            type.any{it == context.getString(R.string.rock)} -> context.getColor(R.color.rock)
+            type.any{it == context.getString(R.string.ghost)} -> context.getColor(R.color.ghost)
+            type.any{it == context.getString(R.string.bug)} -> context.getColor(R.color.bug)
+            type.any{it == context.getString(R.string.ice)} -> context.getColor(R.color.ice)
+            type.any{it == context.getString(R.string.dragon)} -> context.getColor(R.color.dragon)
+            type.any{it == context.getString(R.string.fairy)} -> context.getColor(R.color.fairy)
+            else -> context.getColor(R.color.white)
+        }
     }
 
     override fun getItemCount() = pokemonList.size

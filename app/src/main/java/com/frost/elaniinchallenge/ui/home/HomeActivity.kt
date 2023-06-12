@@ -114,10 +114,15 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setButtons() {
         with(binding){
-            createButton.setOnClickListener { AddActivity.start(this@HomeActivity) }
+            createButton.setOnClickListener {
+                if (isInternetAvailable()) AddActivity.start(this@HomeActivity)
+                else showToast(getString(R.string.no_internet))
+            }
             showCreated.setOnClickListener { showCodeInsert() }
             shareButton.setOnClickListener { showId(viewModel.selectedTeam?.id?:0) }
-            deleteButton.setOnClickListener { viewModel.removeTeam(viewModel.selectedTeam!!) }
+            deleteButton.setOnClickListener {
+                if (isInternetAvailable()) viewModel.removeTeam(viewModel.selectedTeam!!)
+                else showToast(getString(R.string.no_internet)) }
         }
     }
 
@@ -130,7 +135,12 @@ class HomeActivity : AppCompatActivity() {
             }
             codeEditText.setOnEditorActionListener { view, actionId, _ -> onActionDone(actionId, view) }
             saveButton.setOnClickListener {
-                if (!codeEditText.text.isNullOrBlank()) viewModel.save(codeEditText.text.toString())
+                if (isInternetAvailable()) {
+                    if (!codeEditText.text.isNullOrBlank()) viewModel.save(codeEditText.text.toString())
+                }
+                else {
+                    showToast(getString(R.string.no_internet))
+                }
             }
         }
     }

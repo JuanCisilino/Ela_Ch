@@ -98,7 +98,7 @@ class HomeViewModel @Inject constructor(private val homeUC: HomeUC):ViewModel() 
             val team = Team(
                 id = generateUUID(),
                 email = email,
-                region = region,
+                region = externalTeam?.region,
                 name = externalTeam?.name,
                 pokemonIds = externalTeam?.pokemonIds
             )

@@ -19,4 +19,25 @@
     <color name="galar">#9A9A99</color>
     <color name="hisui">#D51551</color>
     <color name="paldea">#E6AAE6</color>
+
+
+    <color name="grass">#28FB19</color>
+    <color name="fire">#CD2E40</color>
+    <color name="poison">#E41CE4</color>
+    <color name="psychic">#EA94D4</color>
+    <color name="fight">#CF0303</color>
+    <color name="water">#1544ED</color>
+    <color name="normal">#B18912</color>
+    <color name="dark">#815217</color>
+    <color name="flying">#2CB8EF</color>
+    <color name="electric">#E8C61F</color>
+    <color name="steel">#979595</color>
+    <color name="ground">#E6D398</color>
+    <color name="rock">#E8B255</color>
+    <color name="ghost">#B60AB6</color>
+    <color name="bug">#279C12</color>
+    <color name="ice">#21EDF4</color>
+    <color name="dragon">#CC07CC</color>
+    <color name="fairy">#F1BEBE</color>
+
 </resources>
