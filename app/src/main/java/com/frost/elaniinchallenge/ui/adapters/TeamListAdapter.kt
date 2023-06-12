@@ -1,4 +1,4 @@
-package com.frost.elaniinchallenge.utils
+package com.frost.elaniinchallenge.ui.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -6,10 +6,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.frost.elaniinchallenge.databinding.TeamItemBinding
-import com.frost.elaniinchallenge.models.Pokemon
 import com.frost.elaniinchallenge.models.Team
 
-class TeamsAdapter(private val context: Context) : RecyclerView.Adapter<TeamsAdapter.ViewHolder>() {
+class TeamListAdapter(private val context: Context) : RecyclerView.Adapter<TeamListAdapter.ViewHolder>() {
 
     private var teamList = listOf<Team>()
     var onTeamClickCallback : ((team: Team) -> Unit)? = null
@@ -43,7 +42,7 @@ class TeamsAdapter(private val context: Context) : RecyclerView.Adapter<TeamsAda
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TeamsAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder) {
             with(teamList[position]) {
                 val team = this

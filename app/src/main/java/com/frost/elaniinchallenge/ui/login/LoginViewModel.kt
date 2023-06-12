@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class MainViewModel @Inject constructor(private val loginUC: LoginUC): ViewModel() {
+class LoginViewModel @Inject constructor(private val loginUC: LoginUC): ViewModel() {
 
     var loadStateLiveData = MutableLiveData<LoadState>()
     var regionListLiveData = MutableLiveData<List<Region>>()

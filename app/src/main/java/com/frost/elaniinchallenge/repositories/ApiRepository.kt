@@ -30,15 +30,20 @@ class ApiRepository @Inject constructor(private val pokeApi: PokeApi) {
             val specieResponse = pokeApi.getBySpecie(pokemon.id!!)
             index += 1
             specieResponse.errorBody()?.let { return ResponseData(errorMessage = it.toString()) }
+
             val pokeGeneration = specieResponse.body()?:return ResponseData(errorMessage = "null result")
             pokemon.region = turnGenerationToNumber(pokeGeneration.generation.name)
-            val flavors = pokeGeneration.flavor_text_entries.filter { it.language.name == "es" }
+
+            val flavors = pokeGeneration.flavor_text_entries.filter { it.language.name == "es" || it.language.name == "en" }
             pokemon.pokedex = flavors.map { it.flavor_text } as ArrayList<String>
+
             val idResponse = pokeApi.getById(pokemon.id!!)
             idResponse.errorBody()?.let { return ResponseData(errorMessage = it.toString()) }
+
             val pokeResponse = idResponse.body()?:return ResponseData(errorMessage = "null result")
             pokemon.image = pokeResponse.sprites.other.artwork.front_default
             pokemon.types = pokeResponse.types.map { it.type.name } as ArrayList<String>
+
             pokemonList.add(pokemon)
         }
         return ResponseData(pokemonList = pokemonList)

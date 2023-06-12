@@ -1,18 +1,18 @@
-package com.frost.elaniinchallenge.ui.addedit
+package com.frost.elaniinchallenge.ui.add
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.frost.elaniinchallenge.models.Pokemon
 import com.frost.elaniinchallenge.models.Team
-import com.frost.elaniinchallenge.usecases.AddEditUc
+import com.frost.elaniinchallenge.usecases.AddUc
 import com.frost.elaniinchallenge.utils.LoadState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AddEditViewModel @Inject constructor(private val addEditUC: AddEditUc): ViewModel() {
+class AddViewModel @Inject constructor(private val addEditUC: AddUc): ViewModel() {
 
     var loadStateLiveData = MutableLiveData<LoadState>()
     var pokemonListLiveData = MutableLiveData<List<Pokemon>>()
@@ -81,6 +81,7 @@ class AddEditViewModel @Inject constructor(private val addEditUC: AddEditUc): Vi
             val team = Team(
                 id = generateUUID(),
                 email = email,
+                region = region,
                 name = teamName,
                 pokemonIds = idList.joinToString(";")
             )
