@@ -34,6 +34,7 @@
                     android:layout_gravity="center"
                     android:textSize="20sp"
                     android:textStyle="bold"
+                    android:fontFamily="@font/pokemon_font"
                     android:layout_marginStart="5dp"
                     android:text="@string/app_name"
                     android:layout_weight="1"/>
